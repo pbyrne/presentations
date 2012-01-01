@@ -319,6 +319,10 @@ alias g=git </pre>
 $
 </pre>
 
+      <p>
+        Configurable with environment variables.
+      </p>
+
       <ul>
         <li>
           <code>GIT_PS1_SHOWDIRTYSTATE=1</code> to show * if there are untracked changes and + if staged
@@ -331,7 +335,7 @@ and uncommitted changes.
           <code>GIT_PS1_SHOWUNTRACKEDFILES=1</code> to show % if there are untracked files.
         </li>
         <li>
-          <code>GIT_PS1_SHOWUPSTREAM=1</code> to show < if there are unpulled changes, > if there are unpushed changes, or <> if there are both.
+          <code>GIT_PS1_SHOWUPSTREAM=1</code> to show &lt; if there are unpulled changes, &gt; if there are unpushed changes, &lt;&gt; if there are both, or = if everything’s synced.
         </li>
       </ul>
     </section>
