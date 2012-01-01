@@ -279,20 +279,18 @@ alias g=git </pre>
 
       <ol>
         <li>
+          <p>Install bash-completion:</p>
           <pre>brew install bash-completion</pre>
         </li>
         <li>
           <p>
-            And then add this to your Bash config:
+            And then add this to your Bash config to load completion scripts from Homebrew packages:
           </p>
           <pre>[ -f `brew --prefix`/etc/bash_completion ] && . `brew -- prefix`/etc/bash_completion</pre>
         </li>
         <li>
-          <p>
-            There is no Step 3. When Homebrew installed Git, it already
-            installed Git’s completion file. We’ve now made Bash load it, and
-            any others from Homebrew.
-          </p>
+          <p>And enable completion for your <code>g</code> alias in addition to <code>git</code>:</p>
+          <pre>complete -o default -o nospace -F _git g</pre>
         </li>
       </ol>
     </section>
