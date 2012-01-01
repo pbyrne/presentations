@@ -265,6 +265,50 @@ alias g=git </pre>
       <img src="images/wtf.png" alt="sample output from 'g wtf'" />
     </section>
 
+    <section class="slide">
+      <h2>g details a237db5</h2>
+      <img src="images/details.png" alt="sample output from 'g details a237db5'" />
+    </section>
+
+    <section class="slide">
+      <h1>Step 3: Git Add-Ons</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Git Completion</h2>
+
+      <p>
+        Autocompletes branch names and commands by typing a few characters and hitting Tab.
+        Simple(ish) to implement, too.
+      </p>
+
+      <ol>
+        <li>
+          <pre>brew install bash-completion</pre>
+        </li>
+        <li>
+          <p>
+            And then add this to your Bash config:
+          </p>
+          <pre>[ -f `brew --prefix`/etc/bash_completion ] && . `brew -- prefix`/etc/bash_completion</pre>
+        </li>
+        <li>
+          <p>
+            There is no Step 3. When Homebrew installed Git, it already
+            installed Git’s completion file. We’ve now made Bash load it, and
+            any others from Homebrew.
+          </p>
+        </li>
+      </ol>
+
+
+    </section>
+
+    <section class="slide">
+      <h2>g co lac[TAB]</h2>
+      <img src="images/completion.png" alt="sample output from 'g co lac[TAB]'" />
+    </section>
+
     <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
     <a href="#" class="deck-next-link" title="Next">&#8594;</a>
 
