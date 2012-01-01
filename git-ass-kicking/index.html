@@ -167,6 +167,53 @@ alias g=git </pre>
       </dl>
     </section>
 
+    <section class="slide">
+      <h1>Step 2: Aliases</h1>
+    </section>
+
+    <section class="slide">
+      <h2>What?</h2>
+
+      <p>This is where you really make Git your own. Create custom commands to do exactly what you want.</p>
+
+      <h3>Two Kinds of Aliases</h3>
+
+      <h4>Standard aliases</h4>
+      <pre>alias.co checkout</pre>
+      <p>Essentially a find and replace. <code>g co master</code> expands to <code>g checkout master</code>.</p>
+
+      <h4>Shell Aliases</h4>
+      <pre>alias.dm '!git diff | mate'</pre>
+      <p>Aliases prefixed with with a bang are performed as if you'd typed them into the shell. This lets you perform more complex interactions with Git.</p>
+    </section>
+
+    <section class="slide">
+      <h2>Why?</h2>
+
+      <p>
+        To make your most frequently used commands (e.g., <code>push</code>,
+        <code>pull</code>, <code>commit</code>,  <code>merge</code>,
+        <code>checkout</code>, <code>diff</code>) even quicker and easier to type (e.g., <code>p</code>,
+        <code>u</code>, <code>c</code>,  <code>m</code>,
+        <code>co</code>, <code>d</code>).
+      </p>
+
+      <p>
+        To make less frequently used commands easier to remember. For example,
+        edit the last commit with <code>g amend</code> instead of <code>g commit
+          --amend</code> or view everything about a specific commit with
+        <code>g details 43344a2</code> instead of <code>log -n1 -p
+          --format=fuller 43344a2</code>
+      </p>
+
+      <p>
+        To allow for more complex functionality, not available within Git
+        itself. View a list of commit messages (changelog-style) between two
+        SHAs, branches, or tags with <code>g changes master production</code>
+        by adding this alias: <code>alias.changes "!f() { git log
+          --pretty=format:'* %s' $1..$2; }; f"</code>
+      </p>
+    </section>
 
     <section class="slide">
       <h2>Slide Title Goes Here</h2>
