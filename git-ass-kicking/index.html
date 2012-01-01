@@ -300,13 +300,45 @@ alias g=git </pre>
           </p>
         </li>
       </ol>
-
-
     </section>
 
     <section class="slide">
       <h2>g co lac[TAB]</h2>
       <img src="images/completion.png" alt="sample output from 'g co lac[TAB]'" />
+    </section>
+
+    <section class="slide">
+      <h2>__git_ps1</h2>
+      <p>
+        Another great part of Git’s completion is the __git_ps1 function. It
+        spits out information about your Git repository, useful for putting in
+        your $PS1 (your shell prompt).
+      </p>
+
+      <pre>
+\w $(rvm-prompt i v 2> /dev/null)\[\e[1m\] $(__git_ps1 2> /dev/null)\[\e[0m\] \n$
+</pre>
+
+      <pre style="background: black; color: white;">
+~/workspace/ngin ree-1.8.7 <strong>(master $=)</strong>
+$
+</pre>
+
+      <ul>
+        <li>
+          <code>GIT_PS1_SHOWDIRTYSTATE=1</code> to show * if there are untracked changes and + if staged
+and uncommitted changes.
+        </li>
+        <li>
+          <code>GIT_PS1_SHOWSTASHSTATE=1</code> to show $ if there are stashed changes.
+        </li>
+        <li>
+          <code>GIT_PS1_SHOWUNTRACKEDFILES=1</code> to show % if there are untracked files.
+        </li>
+        <li>
+          <code>GIT_PS1_SHOWUPSTREAM=1</code> to show < if there are unpulled changes, > if there are unpushed changes, or <> if there are both.
+        </li>
+      </ul>
     </section>
 
     <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
