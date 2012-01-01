@@ -52,12 +52,7 @@
     </section>
 
     <section class="slide">
-      <h2>Section 0</h2>
-
-      <ul>
-        <li>Stay Up-To-Date</li>
-        <li>Save Your Fingers</li>
-      </ul>
+      <h1>Step 0: Before We Begin</h1>
     </section>
 
     <section class="slide">
@@ -113,6 +108,65 @@ alias g=git </pre>
         <li><code>tu</code>, <code>tf</code>, and <code>ti</code> to run unit, functional, and integration tests are left as an excercise for the reader</li>
       </ul>
     </section>
+
+    <section class="slide">
+      <h1>Step 1: Git’s Config Files</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Git to Know Your Config</h2>
+      <p>
+        You've already got one in <code>~/.gitconfig</code> for global settings
+        and <code>.git/config</code> in any Git project.
+      </p>
+
+      <h3>See What's There</h3>
+      <p>
+        <code>g config --list</code> to see all of the current settings.
+      </p>
+      <p>
+        <code>g config --list --global</code> to see just the settings from <code>~/.gitconfig</code>.
+      </p>
+      <p>
+        <code>g config --list --local</code> to see just the settings from <code>.git/config</code>.
+      </p>
+
+      <p>Add or update values with <code>g config --global foo.bar baz</code> to set <code>foo.bar</code> to <code>baz</code>.</p>
+
+      <h3>Find Out More</h3>
+      <p>
+        <code>g help config</code> gives a fairly exhaustive list of available configuration options.
+      </p>
+    </section>
+
+    <section class="slide">
+      <h2>Some Nicer Defaults</h2>
+      <p>Enable these settings by prefixing with <code>g config --global</code>.</p>
+      <dl>
+        <dt>Color in output (diffs, file status, etc.)</dt>
+        <dd><code>color.ui auto</code></dd>
+
+        <dt>Push tracking branch by default</dt>
+        <dd><code>push.default tracking</code></dd>
+
+        <dt>Use FileMerge for merging (comes with Xcode)</dt>
+        <dd><code>diff.tool opendiff</code></dd>
+        <dd><code>merge.tool opendiff</code></dd>
+        <dd><code>difftool.prompt false</code></dd>
+        <dd><code>mergetool.prompt false</code></dd>
+
+        <dt>Prettier, more useful log messages</dt>
+        <dd><code>format.pretty '%Cred%h%Creset %aN -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'</code></dd>
+        <dd><code style="background-color: black; color: white;"><span style="color:red">8bc36cb</span> Patrick Byrne - <span style="color: yellow">(origin/master, origin/HEAD, master)</span> Update to new shared DB IP address <span style="color: green;">(9 days ago)</span></code></dd>
+
+        <dt>Ignore Windows linefeeds</dt>
+        <dd><code>core.autocrlf input</code></dd>
+
+        <dt>Remember how I last handled this merge conflict</dt>
+        <dd><code>rerere.enabled true</code></dd>
+      </dl>
+    </section>
+
 
     <section class="slide">
       <h2>Slide Title Goes Here</h2>
