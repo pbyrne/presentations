@@ -360,6 +360,52 @@ and uncommitted changes.
       <img src="images/wtf.png" alt="sample output from 'g wtf'" />
     </section>
 
+    <section class="slide">
+      <h2>git-extras</h2>
+      <p>
+        <a href="https://github.com/visionmedia/git-extras">git-extras</a> is a
+        nice third-party set of additional Git commands. Nothing life-changing,
+        but some improved quality-of-life.
+      </p>
+
+      <pre>bre install git-extras</pre>
+
+      <ul>
+        <li>
+          <code>g alias</code> to view and add aliases.
+          <ul>
+            <li>
+              <code>g alias</code> to view all aliases.
+            </li>
+            <li>
+              <code>g alias foo</code> to view all aliases matching 'foo'.
+            </li>
+            <li>
+              <code>g alias foo bar</code> to set the <code>foo</code> alias to <code>bar</code>.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <code>g delete-branch foo</code> to delete <code>foo</code> both locally and remotely.
+        </li>
+        <li>
+          <code>g ignore</code> to view and add patterns to the project’s <code>.gitignore</code> file.
+          <ul>
+            <li>
+              <code>g ignore</code> to view all ignored patterns.
+            </li>
+            <li>
+              <code>g ignore foo</code> to add <code>foo</code> to .gitignore.
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>
+        That’s about all I use, but there's loads more.
+      </p>
+    </section>
+
     <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
     <a href="#" class="deck-next-link" title="Next">&#8594;</a>
 
