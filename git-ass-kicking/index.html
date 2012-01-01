@@ -216,6 +216,46 @@ alias g=git </pre>
     </section>
 
     <section class="slide">
+      <h2>Frequent Commands</h2>
+      <ul>
+        <li><code>alias.a add</code></li>
+        <li><code>alias.aa 'add .'</code></li>
+        <li><code>alias.c commit</code></li>
+        <li><code>alias.cm 'commit -m'</code></li>
+        <li><code>alias.co checkout</code></li>
+        <li><code>alias.d diff</code></li>
+        <li><code>alias.dc 'diff --cached'</code></li>
+        <li><code>alias.dcm 'diff --cached | mate'</code></li>
+        <li><code>alias.dm 'diff | mate'</code></li>
+        <li><code>alias.lg 'log --graph --abrev-commit --date=relative'</code></li>
+        <li><code>alias.p push</code></li>
+        <li><code>alias.s status</code></li>
+        <li><code>alias.u pull</code></li>
+        <li><code>alias.ur 'pull --rebase'</code></li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Helpful Commands</h2>
+      <ul>
+        <li><code>alias.amend 'commit --amend'</code></li>
+        <li><code>alias.ammend 'commit --amend'</code></li>
+        <li><code>alias.aa 'add .'</code></li>
+        <li><code>alias.br branch</code></li>
+        <li><code>alias.brs 'branch -a'</code></li>
+        <li><code>alias.branchname '!git branch | grep "^*" | awk '{ print $2 }''</code></li>
+        <li><code>alias.changes '!f() { git log --pretty=format:"* %s" $1..$2; }; f'</code></li>
+        <li><code>alias.deleted 'ls-files --deleted'</code></li>
+        <li><code>alias.details 'log -n1 -p --format=fuller'</code></li>
+        <li><code>alias.ff '!git fetch && git wtf'</code></li>
+        <li><code>alias.mergeupstream '!git fetch upstream && git merge upstream/master master'</code></li>
+        <li><code>alias.searchlogs '!git log --oneline | grep'</code></li>
+        <li><code>alias.today 'log --stat --since="1 Day Ago" --graph --pretty=oneline --abbrev-commit --date=relative'</code></li>
+        <li><code>alias.unstage 'reset HEAD'</code></li>
+      </ul>
+    </section>
+
+    <section class="slide">
       <h2>Slide Title Goes Here</h2>
       <ol>
         <li>
