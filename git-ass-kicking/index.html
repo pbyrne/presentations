@@ -261,11 +261,6 @@ alias g=git </pre>
     </section>
 
     <section class="slide">
-      <h2>g wtf</h2>
-      <img src="images/wtf.png" alt="sample output from 'g wtf'" />
-    </section>
-
-    <section class="slide">
       <h2>g details a237db5</h2>
       <img src="images/details.png" alt="sample output from 'g details a237db5'" />
     </section>
@@ -339,6 +334,28 @@ and uncommitted changes.
           <code>GIT_PS1_SHOWUPSTREAM=1</code> to show < if there are unpulled changes, > if there are unpushed changes, or <> if there are both.
         </li>
       </ul>
+    </section>
+
+    <section class="slide">
+      <h2>g wtf</h2>
+      <p>
+        Emulates Mercurial’s <code>hg incoming</code> and <code>hg
+          outgoing</code> commands. showing you unpushed commits and fetched
+        commits which aren't yet merged. When <code>__git_ps1</code> shows you
+        <code>&gt;</code> or <code>&lt;</code>, <code>g wtf</code> gives you
+        some more details.
+      </p>
+
+      <p>
+        Download from <a
+          href="http://gitorious.org/willgit/mainline/blobs/master/bin/git-wtf">http://gitorious.org/willgit/mainline/blobs/master/bin/git-wtf</a>
+        and put it somewhere in your $PATH.
+      </p>
+    </section>
+
+    <section class="slide">
+      <h2>g wtf</h2>
+      <img src="images/wtf.png" alt="sample output from 'g wtf'" />
     </section>
 
     <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
