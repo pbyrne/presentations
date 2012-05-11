@@ -112,12 +112,26 @@
     </section>
 
     <section class="slide">
-      <h2>Working with the Working Copy</h2>
+      <h2>Working with the Central Repository</h2>
       <ul>
         <li>
           <strong><code>git clone http://example.com/foo.git</code></strong>:
           Set up a local repository with all of the changes at <code>http://example.com/foo.git</code>
         </li>
+        <li>
+          <strong><code>git push</code></strong>:
+          Push all of your changes to the default central repository (alternatively: <code>git push origin master</code> to specifically push the <code>master</code> branch to the server named <code>origin</code>)
+        </li>
+        <li>
+          <strong><code>git pull</code></strong>:
+          Pull the changes from the default central repository and merge them into your working copy
+        </li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Working with your Working Copy</h2>
+      <ul>
         <li>
           <strong><code>git status</code></strong>:
           Display details of the working copy, such as new, deleted, or modified files
@@ -127,16 +141,12 @@
           Add <code>foo.txt</code> to the index
         </li>
         <li>
-          <strong><code>git commit -m "Did this thing"</code></strong>:
-          Commit your changes with the message "Did this thing"
+          <strong><code>git diff</code></strong>:
+          See the changes that you've made, but have not added to the index or committed
         </li>
         <li>
-          <strong><code>git push</code></strong>:
-          Push all of your changes to the default central repository (alternatively: <code>git push origin master</code> to specifically push the <code>master</code> branch to the server named <code>origin</code>)
-        </li>
-        <li>
-          <strong><code>git pull</code></strong>:
-          Pull the changes from the default central repository and merge them into your working copy
+          <strong><code>git diff --cached</code></strong>:
+          See the changes that you've added to the index, but haven't committed
         </li>
         <li>
           <strong><code>git checkout foo.txt</code></strong>:
@@ -160,6 +170,31 @@
           <strong><code>git checkout bar</code></strong>:
           switch your working copy to the branch <code>bar</code>
         </li>
+        <li>
+          <strong><code>git diff otherbranch</code></strong>:
+          See the changes between your current branch and <code>otherbranch</code>
+        </li>
+        <li>
+          <strong><code>git merge otherbranch</code></strong>:
+          Apply the changes in <code>otherbranch</code> into your branch
+        </li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <img src="images/getting-git.jpg" alt="Chuck's sketch that helped him 'get' git" />
+    </section>
+
+    <section class="slide">
+      <h2>Common Workflow</h2>
+      <ul>
+        <li><strong><code>git pull</code></strong> to make sure you have everyone's changes</li>
+        <li>Work on stuff, make some changes of your own</li>
+        <li><strong><code>git status</code></strong> to get an overview of what you've done</li>
+        <li><strong><code>git diff</code></strong> to review the specific changes that you've made</li>
+        <li><strong><code>git add .</code></strong> to add your changes to the index</li>
+        <li><strong><code>git commit -m "Made the thing more awesome"</code></strong> to commit your change to your local repo</li>
+        <li><strong><code>git push</code></strong> to push your changes to the central repo so everyone knows how awesome you are</li>
       </ul>
     </section>
 
