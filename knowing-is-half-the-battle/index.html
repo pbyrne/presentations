@@ -138,7 +138,7 @@
     </section>
 
     <section class="slide">
-      <h2>StatsD</h1>
+      <h2>StatsD</h2>
 
       <h3>TL;DR</h3>
 
@@ -202,6 +202,93 @@
     </section>
 
     <section class="slide">
+      <h2>Graphite</h2>
+
+      <h3>TL;DR</h3>
+
+      <ul>
+        <li class="slide">
+          <p>An open-source suite combining a Django web app, stat receiver, and data store.</p>
+        </li>
+        <li class="slide">
+          <p>Create ad-hoc graphs, tweak them, save them, and build dashboards.</p>
+        </li>
+        <li class="slide">
+          <p>Very powerful. <span class="slide">But that power comes with complexity.</span></p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>See What I Mean?</h2>
+
+      <img src="images/graph-ngin-api-access-with-counts.png">
+      <p class="slide">
+<code>
+<pre>
+legendValue(aliasByNode(limit(sortByMaxima(summarize(stats_counts.ngin_production.api-user-throughput.*:sum,"60seconds")),6),3), "total")
+</pre>
+</code>
+        </p>
+    </section>
+
+    <section class="slide">
+      <h1>Enough Already, What Does it All <strong>MEAN</strong>?</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Examples</h2>
+
+      <img src="images/graph-etsy-login-attempts.jpg" class="vcenter">
+    </section>
+
+    <section class="slide">
+      <h2>Examples</h2>
+
+      <img src="images/graph-hostedgraphote-site-visitors.png" class="vcenter">
+    </section>
+
+    <section class="slide">
+      <h1>No, What Does it Mean For <strong>ME</strong>??</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Who is Using our API?</h2>
+
+      <pre><code>Metrics.record_counter("#{Metrics::API_USER_THROUGHPUT}.#{@api_user.try(:user_name) || 'nil_api_user'}")</code></pre>
+
+      <img src="images/graph-ngin-api-access.png">
+    </section>
+
+    <section class="slide">
+      <h2>How Many Users are Logged In?</h2>
+
+      <pre><code>Metrics.record_boolean('user-logged-in', user_object.persisted?)</code></pre>
+
+      <img src="images/graph-ngin-user-logged-in.png">
+    </section>
+
+    <section class="slide">
+      <h2>How Many Users are Logged In?</h2>
+
+      <pre><code>caches_action :show, :if => lambda {|c| Metrics.record_boolean(Metrics::PAGE_CACHE, c.cache_page?(c.page_node)) }</code></pre>
+
+      <img src="images/graph-ngin-page-cache-attempts.png">
+    </section>
+
+    <section class="slide">
+      <h1>What Do You Want to Know?</h1>
+    </section>
+
+    <section class="slide">
+      <h1>Knowing is Half the Battle</h1>
+    </section>
+
+    <section class="slide">
+      <img src="images/other-half.png" class="vcenter">
+    </section>
+
+    <section class="slide">
       <h2>Resources</h2>
 
       <ul>
@@ -218,6 +305,10 @@
           <a href="http://hostedgraphite.com/">Hosted Graphite</a>
         </li>
       </ul>
+    </section>
+
+    <section class="slide">
+      <h1>Questions?</h1>
     </section>
 
     <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
