@@ -137,6 +137,89 @@
       <h1>So, What?</h1>
     </section>
 
+    <section class="slide">
+      <h2>StatsD</h1>
+
+      <h3>TL;DR</h3>
+
+      <ul>
+        <li class="slide">
+          <p>An open-source tool from Etsy by their devops team.</p>
+        </li>
+        <li class="slide">
+          <p>Daemon listening for simple UDP packets with stats information to pass on to aggregation services.</p>
+
+          <blockquote class="slide">
+            <p>I’d tell you a UDP joke but you might not get it.</p>
+            <p><cite><a href="https://twitter.com/njp/status/291729488453197824">@njp</a></cite></p>
+          </blockquote>
+        </li>
+        <li class="slide">
+          <p>Talks to a lot of backends, like Graphite, AMQP, and others.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>What Kinds of Metrics?</h2>
+
+      <section class="slide">
+        <h3>Counts / Incrementers</h3>
+        <p><code>gorets:1|c</code></p>
+        <p><code>Metrics.record_counter("gorets")</code></p>
+      </section>
+
+      <section class="slide">
+        <h3>Timings</h3>
+        <p><code>glork:320|ms</code></p>
+        <p><code>Metrics.record_timer("gorets") { do_thing }</code></p>
+      </section>
+
+      <section class="slide">
+        <h3>Guages (Arbitrary Numbers)</h3>
+        <p>Not yet implemented in our wrapper. Haven’t needed it yet.</p>
+      </section>
+    </section>
+
+    <section class="slide">
+      <h2>Higher Abstractions</h2>
+
+      <section class="slide">
+        <h3>Booleans</h3>
+        <p><code>Metrics.record_boolean("key", value?)</code></p>
+      </section>
+
+      <section class="slide">
+        <h3>Cache Usage</h3>
+        <p><code>Metrics.record_boolean("page-show")</code></p>
+        <p><code>Metrics.record_cache_miss("page-show")</code></p>
+      </section>
+
+      <section class="slide">
+        <h3>Object Creation</h3>
+        <p><code>Metrics.record_creation("user")</code></p>
+      </section>
+    </section>
+
+    <section class="slide">
+      <h2>Resources</h2>
+
+      <ul>
+        <li>
+          <a href="http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/">“Measure Anything, Measure Everything” –Code as Craft</a>
+        </li>
+        <li>
+          <a href="https://github.com/etsy/statsd/">StatsD</a>
+        </li>
+        <li>
+          <a href="http://graphite.wikidot.com/">Graphite open-source project</a>
+        </li>
+        <li>
+          <a href="http://hostedgraphite.com/">Hosted Graphite</a>
+        </li>
+      </ul>
+    </section>
+
     <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
     <a href="#" class="deck-next-link" title="Next">&#8594;</a>
 
