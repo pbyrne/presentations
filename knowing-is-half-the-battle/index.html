@@ -66,7 +66,7 @@
     <section class="slide">
       <h2>You Know What They Say About Assumptions…</h2>
       <p>But we make them all the time.</p>
-      <ol>
+      <ul>
         <li class="slide">
           <p>“Most of our users won’t be logged in.”</p>
         </li>
@@ -79,7 +79,7 @@
         <li class="slide">
           <p>“This code is fast.”</p>
         </li>
-      </ol>
+      </ul>
     </section>
 
     <section class="slide">
@@ -88,10 +88,6 @@
 
     <section class="slide">
       <h1>Except When it Is</h1>
-    </section>
-
-    <section class="slide callout storytime">
-      <h1>Story Time…</h1>
     </section>
 
     <section class="slide">
@@ -115,6 +111,10 @@
       </ul>
 
       <p class="slide">And now two new tools: <a href="https://github.com/etsy/statsd/">StatsD</a> and <a href="http://graphite.wikidot.com">Graphite</a>.
+    </section>
+
+    <section class="slide callout storytime">
+      <h1>Story Time…</h1>
     </section>
 
     <section class="slide">
@@ -172,7 +172,7 @@
       <section class="slide">
         <h3>Timings</h3>
         <p><code>glork:320|ms</code></p>
-        <p><code>Metrics.record_timer("gorets") { do_thing }</code></p>
+        <p><code>Metrics.record_timer("glork") { do_thing }</code></p>
       </section>
 
       <section class="slide">
@@ -214,7 +214,10 @@
           <p>Create ad-hoc graphs, tweak them, save them, and build dashboards.</p>
         </li>
         <li class="slide">
-          <p>Very powerful. <span class="slide">But that power comes with complexity.</span></p>
+          <p>Very powerful. </p>
+        </li>
+        <li class="slide">
+          <p>But that power comes with complexity.</p>
         </li>
       </ul>
     </section>
@@ -223,13 +226,10 @@
       <h2>See What I Mean?</h2>
 
       <img src="images/graph-ngin-api-access-with-counts.png">
+
       <p class="slide">
-<code>
-<pre>
-legendValue(aliasByNode(limit(sortByMaxima(summarize(stats_counts.ngin_production.api-user-throughput.*:sum,"60seconds")),6),3), "total")
-</pre>
-</code>
-        </p>
+        <code>legendValue(aliasByNode(limit( sortByMaxima(summarize( stats_counts.ngin_production.api-user-throughput.*:sum,"60seconds")),6),3), "total")</code>
+      </p>
     </section>
 
     <section class="slide">
@@ -255,7 +255,7 @@ legendValue(aliasByNode(limit(sortByMaxima(summarize(stats_counts.ngin_productio
     <section class="slide">
       <h2>Who is Using our API?</h2>
 
-      <pre><code>Metrics.record_counter("#{Metrics::API_USER_THROUGHPUT}.#{@api_user.try(:user_name) || 'nil_api_user'}")</code></pre>
+      <pre><code>Metrics.record_counter("api-user-throughput.#{@api_user.try(:user_name) || 'nil_api_user'}")</code></pre>
 
       <img src="images/graph-ngin-api-access.png">
     </section>
@@ -269,19 +269,15 @@ legendValue(aliasByNode(limit(sortByMaxima(summarize(stats_counts.ngin_productio
     </section>
 
     <section class="slide">
-      <h2>How Many Users are Logged In?</h2>
+      <h2>Are We Using Page#show Action Caching?</h2>
 
-      <pre><code>caches_action :show, :if => lambda {|c| Metrics.record_boolean(Metrics::PAGE_CACHE, c.cache_page?(c.page_node)) }</code></pre>
+      <pre><code>caches_action :show, :if => lambda {|c| Metrics.record_boolean("page-cache", c.cache_page?(c.page_node)) }</code></pre>
 
       <img src="images/graph-ngin-page-cache-attempts.png">
     </section>
 
     <section class="slide">
       <h1>What Do You Want to Know?</h1>
-    </section>
-
-    <section class="slide">
-      <h1>Knowing is Half the Battle</h1>
     </section>
 
     <section class="slide">
