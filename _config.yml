@@ -1,0 +1,6 @@
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+permalink: /:title
+paginate: 3
