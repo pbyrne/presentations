@@ -2,5 +2,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - Rakefile
+  - _sample
+  - README.markdown
 permalink: /:title
 paginate: 3
