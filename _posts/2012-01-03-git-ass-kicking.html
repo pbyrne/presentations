@@ -1,0 +1,397 @@
+---
+layout: index
+title: Enhanced Ass-Kicking with Git
+published: true
+style: swiss
+transition: fade
+---
+
+<style type="text/css">
+// some custom styles for this presentation
+.deck-container dt {
+  margin-top: 10px;
+}
+
+.deck-container dd {
+  margin-left: 20px;
+}
+</style>
+
+<section class="slide" id="title-slide">
+  <h1>Enhanced Ass-Kicking with Git</h1>
+</section>
+
+<section class="slide">
+  <h2>Isn&rsquo;t Git already great out of the box?</h2>
+
+  <h3>Well, yes.</h3>
+
+  <p>
+    But its interface was clearly designed by programmers.
+    Its configuration almost makes up for this.
+  </p>
+
+  <p>
+    Almost.
+  </p>
+</section>
+
+<section class="slide">
+  <h1>Step 0: Before We Begin</h1>
+</section>
+
+<section class="slide">
+  <h2>Stay Up-To-Date</h2>
+
+  <p>
+    It helps to stay up-to-date, though. Things keep getting better with each release.
+  </p>
+
+<pre>brew update
+brew upgrade git</pre>
+
+  <p>
+    It also makes sense to keep your ~/.gitconfig in ~/Dropbox elsewhere shared among your computers.
+  </p>
+
+  <p>
+    You should keep <strong>all</strong> your dotfiles there or
+    <a href="http://github.com/pbyrne/dotfiles">a Git project</a>,
+    but that's a topic for another day.
+  </p>
+</section>
+
+<section class="slide">
+  <h2>Save Your Fingers</h2>
+
+  <p>
+    You're going to type <code>git</code> a lot throughout the day. Why not make it a little easier?
+  </p>
+
+  <p>
+    Put this in your <code>.bashrc</code>, <code>.profile</code>, or wherever:
+  </p>
+
+<pre>
+alias g=git </pre>
+
+  <p>
+    Now you'll just need to type <code>g</code> to use Git: e.g., <code>g config</code>, <code>g commit</code>, and <code>g clone</code>.
+  </p>
+
+  <h3>Not Just Git, Either</h3>
+
+  <p>
+    You should make simple-to-remember aliases for all commands you type
+    frequently throughout the day. Some examples:
+  </p>
+
+  <ul>
+    <li><code>be</code> for <code>bundle exec</code></li>
+    <li><code>psg</code> for <code>ps aux | grep</code></li>
+    <li><code>t</code> for <code>bundle exec rake test</code></li>
+    <li><code>tu</code>, <code>tf</code>, and <code>ti</code> to run unit, functional, and integration tests are left as an excercise for the reader</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>Step 1: Git’s Config Files</h1>
+</section>
+
+<section class="slide">
+  <h2>Git to Know Your Config</h2>
+  <p>
+    You've already got one in <code>~/.gitconfig</code> for global settings
+    and <code>.git/config</code> in any Git project.
+  </p>
+
+  <h3>See What's There</h3>
+  <p>
+    <code>g config --list</code> to see all of the current settings.
+  </p>
+  <p>
+    <code>g config --list --global</code> to see just the settings from <code>~/.gitconfig</code>.
+  </p>
+  <p>
+    <code>g config --list --local</code> to see just the settings from <code>.git/config</code>.
+  </p>
+
+  <p>Add or update values with <code>g config --global foo.bar baz</code> to set <code>foo.bar</code> to <code>baz</code>.</p>
+
+  <h3>Find Out More</h3>
+  <p>
+    <code>g help config</code> gives a fairly exhaustive list of available configuration options.
+  </p>
+</section>
+
+<section class="slide">
+  <h2>Some Nicer Defaults</h2>
+  <p>Enable these settings by prefixing with <code>g config --global</code>.</p>
+  <dl>
+    <dt>Color in output (diffs, file status, etc.)</dt>
+    <dd><code>color.ui auto</code></dd>
+
+    <dt>Push tracking branch by default</dt>
+    <dd><code>push.default tracking</code></dd>
+
+    <dt>Use FileMerge for merging (comes with Xcode)</dt>
+    <dd><code>diff.tool opendiff</code></dd>
+    <dd><code>merge.tool opendiff</code></dd>
+    <dd><code>difftool.prompt false</code></dd>
+    <dd><code>mergetool.prompt false</code></dd>
+
+    <dt>Prettier, more useful log messages</dt>
+    <dd><code>format.pretty '%Cred%h%Creset %aN -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'</code></dd>
+    <dd><code style="background-color: black; color: white;"><span style="color:red">8bc36cb</span> Patrick Byrne - <span style="color: yellow">(origin/master, origin/HEAD, master)</span> Update to new shared DB IP address <span style="color: green;">(9 days ago)</span></code></dd>
+
+    <dt>Ignore Windows linefeeds</dt>
+    <dd><code>core.autocrlf input</code></dd>
+
+    <dt>Remember how I last handled this merge conflict</dt>
+    <dd><code>rerere.enabled true</code></dd>
+  </dl>
+</section>
+
+<section class="slide">
+  <h1>Step 2: Aliases</h1>
+</section>
+
+<section class="slide">
+  <h2>What?</h2>
+
+  <p>This is where you really make Git your own. Create custom commands to do exactly what you want.</p>
+
+  <h3>Two Kinds of Aliases</h3>
+
+  <h4>Standard aliases</h4>
+  <pre>alias.co checkout</pre>
+  <p>Essentially a find and replace. <code>g co master</code> expands to <code>g checkout master</code>.</p>
+
+  <h4>Shell Aliases</h4>
+  <pre>alias.dm '!git diff | mate'</pre>
+  <p>Aliases prefixed with with a bang are performed as if you'd typed them into the shell. This lets you perform more complex interactions with Git.</p>
+</section>
+
+<section class="slide">
+  <h2>Why?</h2>
+
+  <p>
+    To make your most frequently used commands (e.g., <code>push</code>,
+    <code>pull</code>, <code>commit</code>,  <code>merge</code>,
+    <code>checkout</code>, <code>diff</code>) even quicker and easier to type (e.g., <code>p</code>,
+    <code>u</code>, <code>c</code>,  <code>m</code>,
+    <code>co</code>, <code>d</code>).
+  </p>
+
+  <p>
+    To make less frequently used commands easier to remember. For example,
+    edit the last commit with <code>g amend</code> instead of <code>g commit
+      --amend</code> or view everything about a specific commit with
+    <code>g details 43344a2</code> instead of <code>log -n1 -p
+      --format=fuller 43344a2</code>
+  </p>
+
+  <p>
+    To allow for more complex functionality, not available within Git
+    itself. View a list of commit messages (changelog-style) between two
+    SHAs, branches, or tags with <code>g changes master production</code>
+    by adding this alias: <code>alias.changes "!f() { git log
+      --pretty=format:'* %s' $1..$2; }; f"</code>
+  </p>
+</section>
+
+<section class="slide">
+  <h2>Frequent Commands</h2>
+  <ul>
+    <li><code>alias.a add</code></li>
+    <li><code>alias.aa 'add .'</code></li>
+    <li><code>alias.c commit</code></li>
+    <li><code>alias.cm 'commit -m'</code></li>
+    <li><code>alias.co checkout</code></li>
+    <li><code>alias.d diff</code></li>
+    <li><code>alias.dc 'diff --cached'</code></li>
+    <li><code>alias.dcm 'diff --cached | mate'</code></li>
+    <li><code>alias.dm 'diff | mate'</code></li>
+    <li><code>alias.lg 'log --graph --abrev-commit --date=relative'</code></li>
+    <li><code>alias.p push</code></li>
+    <li><code>alias.s status</code></li>
+    <li><code>alias.u pull</code></li>
+    <li><code>alias.ur 'pull --rebase'</code></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Helpful Commands</h2>
+  <ul>
+    <li><code>alias.amend 'commit --amend'</code></li>
+    <li><code>alias.ammend 'commit --amend'</code></li>
+    <li><code>alias.br branch</code></li>
+    <li><code>alias.brs 'branch -a'</code></li>
+    <li><code>alias.branchname '!git branch | grep "^*" | awk '{ print $2 }''</code></li>
+    <li><code>alias.changes '!f() { git log --pretty=format:"* %s" $1..$2; }; f'</code></li>
+    <li><code>alias.deleted 'ls-files --deleted'</code></li>
+    <li><code>alias.details 'log -n1 -p --format=fuller'</code></li>
+    <li><code>alias.ff '!git fetch && git wtf'</code></li>
+    <li><code>alias.mergeupstream '!git fetch upstream && git merge upstream/master master'</code></li>
+    <li><code>alias.searchlogs '!git log --oneline | grep'</code></li>
+    <li><code>alias.today 'log --stat --since="1 Day Ago" --graph --pretty=oneline --abbrev-commit --date=relative'</code></li>
+    <li><code>alias.unstage 'reset HEAD'</code></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>g lg</h2>
+  <img src="/images/git-ass-kicking/lg.png" alt="sample output from 'g lg'" />
+</section>
+
+<section class="slide">
+  <h2>g details a237db5</h2>
+  <img src="/images/git-ass-kicking/details.png" alt="sample output from 'g details a237db5'" />
+</section>
+
+<section class="slide">
+  <h1>Step 3: Git Add-Ons</h1>
+</section>
+
+<section class="slide">
+  <h2>Git Completion</h2>
+
+  <p>
+    Autocompletes branch names and commands by typing a few characters and hitting Tab.
+    Simple(ish) to implement, too.
+  </p>
+
+  <ol>
+    <li>
+      <p>Install bash-completion:</p>
+      <pre>brew install bash-completion</pre>
+    </li>
+    <li>
+      <p>
+        And then add this to your Bash config to load completion scripts from Homebrew packages:
+      </p>
+      <pre>[ -f `brew --prefix`/etc/bash_completion ] && . `brew -- prefix`/etc/bash_completion</pre>
+    </li>
+    <li>
+      <p>And enable completion for your <code>g</code> alias in addition to <code>git</code>:</p>
+      <pre>complete -o default -o nospace -F _git g</pre>
+    </li>
+  </ol>
+</section>
+
+<section class="slide">
+  <h2>g co lac[TAB]</h2>
+  <img src="/images/git-ass-kicking/completion.png" alt="sample output from 'g co lac[TAB]'" />
+</section>
+
+<section class="slide">
+  <h2>__git_ps1</h2>
+  <p>
+    Another great part of Git’s completion is the __git_ps1 function. It
+    spits out information about your Git repository, useful for putting in
+    your $PS1 (your shell prompt).
+  </p>
+
+  <pre>
+\w $(rvm-prompt i v 2> /dev/null)\[\e[1m\] $(__git_ps1 2> /dev/null)\[\e[0m\] \n$
+</pre>
+
+  <pre style="background: black; color: white;">
+~/workspace/ngin ree-1.8.7 <strong>(master $=)</strong>
+$
+</pre>
+
+  <p>
+    Configurable with environment variables.
+  </p>
+
+  <ul>
+    <li>
+      <code>GIT_PS1_SHOWDIRTYSTATE=1</code> to show * if there are unstaged changes and + if staged
+and uncommitted changes.
+    </li>
+    <li>
+      <code>GIT_PS1_SHOWSTASHSTATE=1</code> to show $ if there are stashed changes.
+    </li>
+    <li>
+      <code>GIT_PS1_SHOWUNTRACKEDFILES=1</code> to show % if there are untracked files.
+    </li>
+    <li>
+      <code>GIT_PS1_SHOWUPSTREAM=1</code> to show &lt; if there are unpulled changes, &gt; if there are unpushed changes, &lt;&gt; if there are both, or = if everything’s synced.
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>g wtf</h2>
+  <p>
+    Emulates Mercurial’s <code>hg incoming</code> and <code>hg
+      outgoing</code> commands. showing you unpushed commits and fetched
+    commits which aren't yet merged. When <code>__git_ps1</code> shows you
+    <code>&gt;</code> or <code>&lt;</code>, <code>g wtf</code> gives you
+    some more details.
+  </p>
+
+  <p>
+    Download from <a
+      href="http://gitorious.org/willgit/mainline/blobs/master/bin/git-wtf">http://gitorious.org/willgit/mainline/blobs/master/bin/git-wtf</a>
+    and put it somewhere in your $PATH.
+  </p>
+</section>
+
+<section class="slide">
+  <h2>g wtf</h2>
+  <img src="/images/git-ass-kicking/wtf.png" alt="sample output from 'g wtf'" />
+</section>
+
+<section class="slide">
+  <h2>git-extras</h2>
+  <p>
+      A nice third-party set of additional Git commands. Nothing
+      life-changing, but some improved quality-of-life. For more details,
+      check out <a href="https://github.com/visionmedia/git-extras">its
+        GitHub project page</a>.
+  </p>
+
+  <pre>brew install git-extras</pre>
+
+  <ul>
+    <li>
+      <code>g alias</code> to view and add aliases.
+      <ul>
+        <li>
+          <code>g alias</code> to view all aliases.
+        </li>
+        <li>
+          <code>g alias foo</code> to view all aliases matching 'foo'.
+        </li>
+        <li>
+          <code>g alias foo bar</code> to set the <code>foo</code> alias to <code>bar</code>.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <code>g delete-branch foo</code> to delete <code>foo</code> both locally and remotely.
+    </li>
+    <li>
+      <code>g ignore</code> to view and add patterns to the project’s <code>.gitignore</code> file.
+      <ul>
+        <li>
+          <code>g ignore</code> to view all ignored patterns.
+        </li>
+        <li>
+          <code>g ignore foo</code> to add <code>foo</code> to .gitignore.
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>
+    That’s about all I use, but there's loads more.
+  </p>
+</section>
+
+<section class="slide">
+  <h1>Questions?</h1>
+</section>
+
