@@ -1,105 +1,33 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+---
+layout: index
+title: My Presentations
+style: web-2.0
+transition: horizontal-slide
+---
 
-    <title>My Presentations</title>
+<section class="slide" id="title-one">
+  <h2>Presentations</h2>
 
-    <meta name="description" content="A jQuery library for modern HTML presentations">
-    <meta name="author" content="Caleb Troughton">
-    <meta name="viewport" content="width=1024, user-scalable=no">
+  <p>
+    I give the occasional presentation at work, and it’s just as easy to
+    put them here for all to see. Feel free to <a
+      href="https://github.com/pbyrne/presentations">check out the
+      source</a> if you like.
+  </p>
 
-    <!-- Core and extension CSS files -->
-    <link rel="stylesheet" href="deck.js/core/deck.core.css">
-    <link rel="stylesheet" href="deck.js/extensions/goto/deck.goto.css">
-    <link rel="stylesheet" href="deck.js/extensions/menu/deck.menu.css">
-    <link rel="stylesheet" href="deck.js/extensions/navigation/deck.navigation.css">
-    <link rel="stylesheet" href="deck.js/extensions/status/deck.status.css">
-    <link rel="stylesheet" href="deck.js/extensions/hash/deck.hash.css">
+  <ul>
+    {% for post in site.posts %}
+      <li>
+        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+        <p>{{ post.description }}</p>
+      </li>
+    {% endfor %}
+  </ul>
 
-    <!-- Theme CSS files (menu swaps these out) -->
-    <link rel="stylesheet" id="style-theme-link" href="deck.js/themes/style/web-2.0.css">
-    <link rel="stylesheet" id="transition-theme-link" href="deck.js/themes/transition/horizontal-slide.css">
-
-    <!-- Custom CSS just for this page -->
-    <link rel="stylesheet" href="presentation.css">
-
-    <script src="deck.js/modernizr.custom.js"></script>
-  </head>
-
-  <body class="deck-container">
-    <section class="slide" id="title-one">
-      <h2>Presentations</h2>
-
-      <p>
-        I give the occasional presentation at work, and it’s just as easy to
-        put them here for all to see. Feel free to <a
-          href="https://github.com/pbyrne/presentations">check out the
-          source</a> if you like.
-      </p>
-
-      <ul>
-        <li>
-          <h3><a href="git-ass-kicking/index.html">Enhanced Ass-Kicking with Git</a></h3>
-          <p>Getting to know Git’s configuration options and first- and third-party add-ons to help you kick even more ass than normal.</p>
-        </li>
-        <li>
-          <h3><a href="git-for-normals/index.html">Git for Normals</a></h3>
-          <p>An introduction to Git for non-programmers.</p>
-        </li>
-        <li>
-          <h3><a href="knowing-is-half-the-battle/index.html">Knowing is Half the Battle</a></h3>
-          <p>An introduction to <a href="https://github.com/etsy/statsd/">StatsD</a> and <a href="http://graphite.wikidot.com">Graphite</a> for collecting and displaying custom metrics about your application.</p>
-        </li>
-      </ul>
-
-      <p>
-        Copyright &copy; 2012&mdash;2013
-        <a href="http://patrickbyrne.net/">Patrick Byrne</a>
-        |
-        Slides built with <a href="http://imakewebthings.github.com/deck.js/">deck.js</a>
-      </p>
-    </section>
-
-
-
-
-    <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
-    <a href="#" class="deck-next-link" title="Next">&#8594;</a>
-
-    <p class="deck-status">
-      <span class="deck-status-current"></span>
-      /
-      <span class="deck-status-total"></span>
-    </p>
-
-    <form action="." method="get" class="goto-form">
-      <label for="goto-slide">Go to slide:</label>
-      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
-      <datalist id="goto-datalist"></datalist>
-      <input type="submit" value="Go">
-    </form>
-
-    <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
-
-
-    <!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
-    <script src="deck.js/jquery-1.7.min.js"></script>
-
-    <!-- Deck Core and extensions -->
-    <script src="deck.js/core/deck.core.js"></script>
-    <script src="deck.js/extensions/hash/deck.hash.js"></script>
-    <script src="deck.js/extensions/menu/deck.menu.js"></script>
-    <script src="deck.js/extensions/goto/deck.goto.js"></script>
-    <script src="deck.js/extensions/status/deck.status.js"></script>
-    <script src="deck.js/extensions/navigation/deck.navigation.js"></script>
-
-    <!-- Specific to this page -->
-    <script src="presentation.js"></script>
-
-  </body>
-</html>
+  <p>
+    Copyright &copy; 2012&mdash;2013
+    <a href="http://patrickbyrne.net/">Patrick Byrne</a>
+    |
+    Slides built with <a href="http://imakewebthings.github.com/deck.js/">deck.js</a>
+  </p>
+</section>
