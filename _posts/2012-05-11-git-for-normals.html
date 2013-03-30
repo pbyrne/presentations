@@ -1,0 +1,175 @@
+---
+layout: index
+title: Git for Normals
+description: An introduction to Git for non-programmers.
+published: true
+style: swiss
+transition: horizontal-slide
+---
+
+<section class="slide" id="title-slide">
+  <h1>Git for Normals</h1>
+</section>
+
+<section class="slide">
+  <h2>What is Git?</h2>
+  <p>A distributed version control system.</p>
+</section>
+
+<section class="slide">
+  <h2>What is a Distributed Version Control System?</h2>
+  <ol>
+    <li>
+      <h3>Distributed</h3>
+      <p>Does not depend on a central server.</p>
+    </li>
+    <li>
+      <h3>Version Control System</h3>
+      <p>What?</p>
+    </li>
+  </ol>
+</section>
+
+<section class="slide">
+  <h2>What is a Version Control System?</h2>
+  <img src="/images/git-for-normals/sumup.png" alt="There is too much. Let me sum up." />
+</section>
+
+<section class="slide">
+  <h2>Continuum of Version Control</h2>
+  <ol>
+    <li>Nothing, just save your files.</li>
+    <li>Rename the files (<code>example.jpg</code>, <code>example2.jpg</code>, <code>example3.jpg</code>)</li>
+    <li>Dropbox</li>
+    <li>A true version control system</li>
+  </ol>
+</section>
+
+<section class="slide">
+  <img src="/images/git-for-normals/git-flow.png" alt="" />
+</section>
+
+<section class="slide">
+  <h2>Seriously, What is a Version Control System?</h2>
+  <ul>
+    <li>It keeps track of your things.</li>
+    <li>It remembers the changes that have been made, and by whom.</li>
+    <li>It lets you go back and forth through the history.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Thesaurus</h2>
+  <img src="/images/git-for-normals/thesaurus.jpg" alt="Rawr! Thesaurus Rex!" />
+</section>
+
+<section class="slide">
+  <h2>Thesaurus</h2>
+  <ul>
+    <li><strong>repository</strong>: the history of changes (aka: repo)</li>
+    <li><strong>working copy</strong>: the set of files being worked on</li>
+    <li><strong>commit</strong>: a particular set of changes (aka: revision, changeset)</li>
+    <li><strong>branch</strong>: a diverging set of changes</li>
+    <li><strong>tag</strong>: a bookmark to a particular commit</li>
+    <li><strong>index</strong>: a staging area with items to be committed</li>
+    <li><strong>pull request</strong>: a request to merge your changes into another branch or repository</li>
+    <li><strong>check out</strong>: to update your working copy to a particular branch, revision, or tag</li>
+    <li><strong>commit</strong>: to save your changes to your repository</li>
+    <li><strong>merge</strong>: to apply someone's changes to a branch</li>
+    <li><strong>push</strong>: to send your changes to another repository</li>
+    <li><strong>pull</strong>: to download changes from another repository</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Warning!</h2>
+  <img src="/images/git-for-normals/programming.jpg" alt="Programming imminent!" />
+</section>
+
+<section class="slide">
+  <h2>Working with the Central Repository</h2>
+  <ul>
+    <li>
+      <strong><code>git clone http://example.com/foo.git</code></strong>:
+      Set up a local repository with all of the changes at <code>http://example.com/foo.git</code>
+    </li>
+    <li>
+      <strong><code>git push</code></strong>:
+      Push all of your changes to the default central repository (alternatively: <code>git push origin master</code> to specifically push the <code>master</code> branch to the server named <code>origin</code>)
+    </li>
+    <li>
+      <strong><code>git pull</code></strong>:
+      Pull the changes from the default central repository and merge them into your working copy
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Working with your Working Copy</h2>
+  <ul>
+    <li>
+      <strong><code>git status</code></strong>:
+      Display details of the working copy, such as new, deleted, or modified files
+    </li>
+    <li>
+      <strong><code>git add foo.txt</code></strong>:
+      Add <code>foo.txt</code> to the index
+    </li>
+    <li>
+      <strong><code>git diff</code></strong>:
+      See the changes that you've made, but have not added to the index or committed
+    </li>
+    <li>
+      <strong><code>git diff --cached</code></strong>:
+      See the changes that you've added to the index, but haven't committed
+    </li>
+    <li>
+      <strong><code>git checkout foo.txt</code></strong>:
+      Undo the changes to <code>foo.txt</code> and replace with the version from the repository
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Working with Branches</h2>
+  <ul>
+    <li>
+      <strong><code>git branch</code></strong>:
+      Display list of local branches with the current branch highlighted
+    </li>
+    <li>
+      <strong><code>git branch --all</code></strong>:
+      Also list the branches on the remote server
+    </li>
+    <li>
+      <strong><code>git checkout bar</code></strong>:
+      switch your working copy to the branch <code>bar</code>
+    </li>
+    <li>
+      <strong><code>git diff otherbranch</code></strong>:
+      See the changes between your current branch and <code>otherbranch</code>
+    </li>
+    <li>
+      <strong><code>git merge otherbranch</code></strong>:
+      Apply the changes in <code>otherbranch</code> into your branch
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <img src="/images/git-for-normals/getting-git.jpg" alt="Chuck's sketch that helped him 'get' git" />
+</section>
+
+<section class="slide">
+  <h2>Common Workflow</h2>
+  <ul>
+    <li><strong><code>git pull</code></strong> to make sure you have everyone's changes</li>
+    <li>Work on stuff, make some changes of your own</li>
+    <li><strong><code>git status</code></strong> to get an overview of what you've done</li>
+    <li><strong><code>git diff</code></strong> to review the specific changes that you've made</li>
+    <li><strong><code>git add .</code></strong> to add your changes to the index</li>
+    <li><strong><code>git commit -m "Made the thing more awesome"</code></strong> to commit your change to your local repo</li>
+    <li><strong><code>git push</code></strong> to push your changes to the central repo so everyone knows how awesome you are</li>
+  </ul>
+</section>
+
