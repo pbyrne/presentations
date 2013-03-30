@@ -16,18 +16,12 @@ transition: horizontal-slide
   </p>
 
   <ul>
-    <li>
-      <h3><a href="git-ass-kicking/">Enhanced Ass-Kicking with Git</a></h3>
-      <p>Getting to know Git’s configuration options and first- and third-party add-ons to help you kick even more ass than normal.</p>
-    </li>
-    <li>
-      <h3><a href="git-for-normals/">Git for Normals</a></h3>
-      <p>An introduction to Git for non-programmers.</p>
-    </li>
-    <li>
-      <h3><a href="knowing-is-half-the-battle/">Knowing is Half the Battle</a></h3>
-      <p>An introduction to <a href="https://github.com/etsy/statsd/">StatsD</a> and <a href="http://graphite.wikidot.com">Graphite</a> for collecting and displaying custom metrics about your application.</p>
-    </li>
+    {% for post in site.posts %}
+      <li>
+        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+        <p>{{ post.description }}</p>
+      </li>
+    {% endfor %}
   </ul>
 
   <p>
