@@ -1,0 +1,245 @@
+---
+layout: index
+title: Knowing is Half the Battle
+description: An introduction to <a href="https://github.com/etsy/statsd/">StatsD</a> and <a href="http://graphite.wikidot.com">Graphite</a> for collecting and displaying custom metrics about your application.
+published: true
+style: swiss
+transition: horizontal-slide
+---
+
+:css
+  .slide.callout, .slide.callout h1 {
+    background-color: #222;
+    color: #eeeeee;
+  }
+  .slide.storytime {
+    background-image: url(/images/knowing-is-half-the-battle/storytime.jpg);
+    background-size: 100%;
+  }
+  .slide.storytime h1 {
+    font-weight: normal;
+    font-size: 3em;
+    padding: 1rem;
+    position: absolute;
+    top: 80%;
+    left: 0;
+    width: 40%;
+    opacity: 0.9;
+  }
+
+%section.slide
+  %h1 Knowing is Half the Battle
+
+%section.slide
+  %h1
+    %em or
+    Making Decisions with Data
+
+%section.slide
+  %h2 You Know What They Say About Assumptions…
+  %p But we make them all the time.
+  %ul
+    %li.slide
+      %p “Most of our users won’t be logged in.”
+    %li.slide
+      %p “This page is accessed infrequently.”
+    %li.slide
+      %p “This situation will never happen.”
+    %li.slide
+      %p “This code is fast.”
+
+%section.slide
+  %h1 Not That Big a Deal
+
+%section.slide
+  %h1 Except When it Is
+
+%section.slide.callout.storytime
+  %h1 Story Time…
+
+%section.slide
+  %h2 So What Can We Do?
+
+  %p Start measuring things. Prove that you’re right.
+
+  %ul
+    %li.slide
+      %p New Relic performance traces and exception logging
+    %li.slide
+      %p Scribbler for complex custom logging
+    %li.slide
+      %p Google Analytics
+    %li.slide
+      %p
+        Make
+        %del shit
+        %ins stuff
+        up
+
+  %p.slide
+    And now two new tools:
+    %a{href: "https://github.com/etsy/statsd/"} StatsD
+    and
+    %a{href: "http://graphite.wikidot.com"} Graphite
+
+%section.slide
+  %h2 What? Why?
+
+  %ul
+    %li
+      %p We wanted the ability to record and graph arbitrary information, with more flexibility than New Relic.
+    %li
+      %p
+        It had to have
+        %strong no
+        impact on the performance of the application.
+    %li
+      %p It had to be easy.
+
+%section.slide
+  %h1 So, What?
+
+%section.slide
+  %h2 StatsD
+
+  %h3 TL;DR
+
+  %ul
+    %li.slide
+      %p An open-source tool from Etsy by their devops team.
+    %li.slide
+      %p Daemon listening for simple UDP packets with stats information to pass on to aggregation services.
+
+      %blockquote.slide
+        %p I’d tell you a UDP joke but you might not get it.
+        %p
+          %cite
+            %a{href: "https://twitter.com/njp/status/291729488453197824"} @njp
+    %li.slide
+      %p Talks to a lot of backends, like Graphite, AMQP, Rapid Engines, AppFirst, and others.
+
+%section.slide
+  %h2 What Kinds of Metrics?
+
+  %section.slide
+    %h3 Counts / Incrementers
+    %p
+      %code gorets:1|c
+    %p
+      %code Metrics.record_counter("gorets")
+
+  %section.slide
+    %h3 Timings
+    %p glork:320|ms
+    %p 
+      %code Metrics.record_timer("glork") { do_thing }
+
+  %section.slide
+    %h3 Guages (Arbitrary Numbers)
+    %p Not yet implemented in our wrapper. Haven’t needed it yet.
+
+%section.slide
+  %h2 Higher Abstractions
+
+  %section.slide
+    %h3 Booleans
+    %p 
+      %code Metrics.record_boolean("key", value?)
+
+  %section.slide
+    %h3 Cache Usage
+    %p 
+      %code Metrics.record_boolean("page-show")
+    %p 
+      %code Metrics.record_cache_miss("page-show")
+
+  %section.slide
+    %h3 Object Creation
+    %p 
+      %code Metrics.record_creation("user")
+
+%section.slide
+  %h2 Graphite
+
+  %h3 TL;DR
+
+  %ul
+    %li.slide
+      %p An open-source suite combining a Django web app, stat receiver, and data store.
+    %li.slide
+      %p Create ad-hoc graphs, tweak them, save them, and build dashboards.
+    %li.slide
+      %p Very powerful.
+    %li.slide
+      %p But that power comes with complexity.
+
+%section.slide
+  %h2 See What I Mean?
+
+  %img{src: "/images/knowing-is-half-the-battle/graph-ngin-api-access-with-counts.png"}
+
+  %p.slide
+    %code legendValue(aliasByNode(limit( sortByMaxima(summarize( stats_counts.ngin_production.api-user-throughput.*:sum,"60seconds")),6),3), "total")
+
+%section.slide
+  %h1 Enough Already, What Does it All MEAN?
+
+%section.slide
+  %h2 Examples
+
+  %img.vcenter{src: "/images/knowing-is-half-the-battle/graph-etsy-login-attempts.jpg"}
+
+%section.slide
+  %h2 Examples
+
+  %img.vcenter{src: "/images/knowing-is-half-the-battle/graph-hostedgraphote-site-visitors.png"}
+
+%section.slide
+  %h1 No, What Does it Mean For ME??
+
+%section.slide
+  %h2 Who is Using our API?
+
+  %pre
+    %code Metrics.record_counter("api-user-throughput.\#{@api_user.try(:user_name) || 'nil_api_user'}")
+
+  %img{src: "/images/knowing-is-half-the-battle/graph-ngin-api-access.png"}
+
+%section.slide
+  %h2 How Many Users are Logged In?
+
+  %pre
+    %code Metrics.record_boolean('user-logged-in', user_object.persisted?)
+
+  %img{src: "/images/knowing-is-half-the-battle/graph-ngin-user-logged-in.png"}
+
+%section.slide
+  %h2 Are We Using Page#show Action Caching?
+
+  %pre
+    %code caches_action :show, :if => lambda {|c| Metrics.record_boolean("page-cache", c.cache_page?(c.page_node)) }
+
+  %img{src: "/images/knowing-is-half-the-battle/graph-ngin-page-cache-attempts.png"}
+
+%section.slide
+  %h1 What Do You Want to Know?
+
+%section.slide
+  %img.vcenter{src: "/images/knowing-is-half-the-battle/other-half.png"}
+
+%section.slide
+  %h1 Questions?
+
+%section.slide
+  %h2 Resources
+
+  %ul
+    %li
+      %a{href: "http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/"}“Measure Anything, Measure Everything” –Code as Craft
+    %li
+      %a{href: "https://github.com/etsy/statsd/"}StatsD
+    %li
+      %a{href: "http://graphite.wikidot.com/"}Graphite open-source project
+    %li
+      %a{href: "http://hostedgraphite.com/"}Hosted Graphite
+

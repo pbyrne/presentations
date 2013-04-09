@@ -5,6 +5,8 @@ GEM
       fast-stemmer (>= 1.0.0)
     directory_watcher (1.5.1)
     fast-stemmer (1.0.2)
+    haml (4.0.1)
+      tilt
     jekyll (0.12.1)
       classifier (~> 1.3)
       directory_watcher (~> 1.1)
@@ -12,6 +14,9 @@ GEM
       liquid (~> 2.3)
       maruku (~> 0.5)
       pygments.rb (~> 0.3.2)
+    jekyll-haml (0.0.1)
+      haml (>= 3.0.0)
+      jekyll (>= 0.10.0)
     kramdown (0.14.2)
     liquid (2.5.0)
     maruku (0.6.1)
@@ -21,6 +26,7 @@ GEM
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
     syntax (1.0.0)
+    tilt (1.3.6)
     yajl-ruby (1.1.0)
 
 PLATFORMS
@@ -28,3 +34,4 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll
+  jekyll-haml
