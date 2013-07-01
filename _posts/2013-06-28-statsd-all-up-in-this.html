@@ -1,0 +1,233 @@
+---
+layout: index
+title: StatsD All Up in This
+description: Going into a bit more depth about how to use StatsD and Graphite to answer questions.
+published: true
+style: sugar
+transition: horizontal-slide
+---
+
+<section class="slide">
+  <h1>StatsD All Up in This</h1>
+</section>
+
+<section class="slide">
+  <h2>Why?</h2>
+
+  <p>Knowing is better than guessing</p>
+</section>
+
+<section class="slide">
+  <h2>What Are We Doing Already?</h2>
+
+  <ul>
+    <li class="slide">
+      <p>New Relic</p>
+      <ul>
+        <li>Performance metrics</li>
+        <li>Throughput, traffic metrics</li>
+        <li>Error logging</li>
+      </ul>
+    </li>
+    <li class="slide">
+      <p>Custom logging</p>
+      <ul>
+        <li>Arbitrary information about events when they occur</li>
+        <li>Mostly for lookup and review after-the-fact</li>
+      </ul>
+    </li>
+    <li class="slide">
+      <p>StatsD/Graphite!</p>
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>Huh?</h1>
+</section>
+
+<section class="slide">
+  <h2>Aggregated Data Over Time</h2>
+
+  <p>Three types of data it can record</p>
+
+  <ul>
+    <li class="slide">
+      <p>Incrementing/Decrementing Counts</p>
+      <ul>
+        <li class="slide">How many users have signed up?</li>
+        <li class="slide">How many games were created?</li>
+        <li class="slide">Inventory</li>
+      </ul>
+    </li>
+    <li class="slide">
+      <p>Length of time to complete</p>
+      <ul>
+        <li class="slide">How long are a particular type of request taking?</li>
+      </ul>
+    </li>
+    <li class="slide">
+      <p>Number of something at a given time</p>
+      <ul>
+        <li class="slide">How many users are logged in at this moment?</li>
+        <li class="slide">How many web servers are booted at this moment?</li>
+      </ul>
+    </li>
+
+    <p>Historical insight into data we otherwise have been only able to get point-in-time information previously</p>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>What is StatsD?</h2>
+
+  <ul>
+    <li>Open-source generic metrics collector</li>
+    <li>Made by Etsy</li>
+    <li>Dead simple</li>
+    <li>
+      <p>Built not to impact your app's performance</p>
+      <ul>
+        <li>This is <strong>vitally important</strong>, and many for-pay metrics vendors don't seem to get this right</li>
+        <li>The StatsD server can be on fire, but your app will just keep moving along</li>
+      </ul>
+    </li>
+    <li>
+      <p>Receives stats from your app (or shell scripts, or anything) and passes along to whichever backedn you have configured</p>
+      <ul>
+        <li>Your app doesn't need to know where the data goes or the format that the backend expects</li>
+        <li>The StatsD server can be on fire, but your app will just keep moving along</li>
+      </ul>
+    </li>
+    <li>Graphite is a common backend for StatsD traffic</li>
+</section>
+
+<section class="slide">
+  <h2>What is Graphite?</h2>
+
+  <ul>
+    <li>Open-source project to collect and graph metrics **over time**</li>
+    <li>Very powerful, but at the cost of complexity</li>
+    <li>
+      <p>Accepts the stats from StatsD and saves them</p>
+      <ul>
+        <li>Data gets compressed as it ages, which is configurable if your run your own server</li>
+      </ul>
+    </li>
+    <li>The meat of it is the query language used to produce graphs</li>
+    <li>
+      <p>Lots of options to get the data out</p>
+      <ul>
+        <li>Dashboards of graphs is most common</li>
+        <li>Images can be embedded in other pages</li>
+        <li>JSON can be fetched to get parsed by other apps</li>
+      </ul>
+    </li>
+</section>
+
+<section class="slide">
+  <h1>Word Problems</h1>
+</section>
+
+<section class="slide">
+  <h2>Delayed Job Queues</h2>
+
+  <div>
+    <h3>Problem</h3>
+    <p>How queued do our delayed job servers get?</p>
+  </div>
+
+  <div class="slide">
+    <h3>Proposal</h3>
+    <p>Every minute, look at the queued jobs, and record how many jobs are at each priority level</p>
+  </div>
+
+  <div class="slide">
+    <h3>Send Stats</h3>
+    <pre><code>prioties.each do |priority, count|
+  # e.g., "delayed_jobs.10", 45
+  Metrics.record_number("delayed_jobs.#{priority}", count)
+end</code></pre>
+  </div>
+
+  <div class="slide">
+    <h3>Query</h3>
+    <pre><code>stats.gauges.ngin_production.delayed_jobs.*<code></pre>
+</section>
+
+<section class="slide">
+  <img src="/images/statsd/delayed-jobs.png" alt="Example graph of delayed jobs queues" />
+</section>
+
+
+<section class="slide">
+  <h2>Ngin Web Server Capacity</h2>
+
+  <div>
+    <h3>Problem</h3>
+    <p>Over time, how many of our available web server workers are in use? How close to capacity are we during peak traffic?</p>
+  </div>
+
+  <div class="slide">
+    <h3>Proposal</h3>
+    <p>Every minute, on each server, query the `passenger-status` script, and record how many active, booted, and maximum workers are available and sum them up.</p>
+  </div>
+
+  <div class="slide">
+    <h3>Send Stats</h3>
+    <pre><code>Metrics.record_number("passengers.#{server_id}.active", passenger_stats.active)
+Metrics.record_number("passengers.#{server_id}.booted", passenger_stats.booted)
+Metrics.record_number("passengers.#{server_id}.max", passenger_stats.max)
+Metrics.record_number("passengers.#{server_id}.queued", passenger_stats.queued)</code></pre>
+  </div>
+
+  <div class="slide">
+    <h3>Query</h3>
+    <pre>sumSeries(stats.gauges.ngin_production.passengers.*.active)</pre>
+</section>
+
+<section class="slide">
+  <img src="/images/statsd/ngin-passengers.png" alt="Example graph of Ngin Passenger capacity" />
+</section>
+
+<section class="slide">
+  <h2>Completed Games</h2>
+
+  <div>
+    <h3>Problem</h3>
+    <p>How many games are completed every night, and which sports are they for, and what type of scoring do they use?</p>
+  </div>
+
+  <div class="slide">
+    <h3>Proposal</h3>
+    <p>Every time a game is completed, record its sport and its scoring type.</p>
+  </div>
+
+  <div class="slide">
+    <h3>Send Stats</h3>
+    <pre><code>Metrics.record_counter("games.completed-by-sport.#{sport.name}")
+Metrics.record_counter("games.completed-by-scoring-type.#{scoring_type}")</code></pre>
+  </div>
+
+  <div class="slide">
+    <h3>Query</h3>
+    <pre>stats_counts.ngin_production.games.completed-by-sport.*</pre>
+</section>
+
+<section class="slide">
+  <img src="/images/statsd/games-by-sport.png" alt="Example graph of games completed, by sport" />
+</section>
+
+<section class="slide">
+  <img src="/images/statsd/games-by-scoring-type.png" alt="Example graph of games completed, by scoring type" />
+</section>
+
+<section class="slide">
+  <h2>Further Reading</h2>
+
+  <ul>
+    <li>Presentation I gave to devs: <a href="http://presentations.patrickbyrne.net/knowing-is-half-the-battle/">Knowing is Half the Battle</a></li>
+    <li>Etsy's development blog post introducing StatsD: <a href="http://codeascraft.com/2011/02/15/measure-anything-measure-everything/">Measure Anything, Measure Everything | Code as Craft</a></li>
+    <li><a href="https://www.hostedgraphite.com">HostedGraphite.com</a></li>
+  </ul>
+</section>
