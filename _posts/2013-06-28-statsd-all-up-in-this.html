@@ -7,6 +7,12 @@ style: sugar
 transition: horizontal-slide
 ---
 
+<style type="text/css">
+img.graph {
+  margin-top: 3em;
+}
+</style>
+
 <section class="slide">
   <h1>StatsD All Up in This</h1>
 </section>
@@ -74,7 +80,7 @@ transition: horizontal-slide
       </ul>
     </li>
 
-    <p>Historical insight into data we otherwise have been only able to get point-in-time information previously</p>
+    <p class="slide">Historical insight into data we otherwise have been only able to get point-in-time information previously</p>
   </ul>
 </section>
 
@@ -93,7 +99,7 @@ transition: horizontal-slide
       </ul>
     </li>
     <li>
-      <p>Receives stats from your app (or shell scripts, or anything) and passes along to whichever backedn you have configured</p>
+      <p>Receives stats from your app (or shell scripts, or anything) and passes along to whichever backend you have configured</p>
       <ul>
         <li>Your app doesn't need to know where the data goes or the format that the backend expects</li>
         <li>The StatsD server can be on fire, but your app will just keep moving along</li>
@@ -106,7 +112,7 @@ transition: horizontal-slide
   <h2>What is Graphite?</h2>
 
   <ul>
-    <li>Open-source project to collect and graph metrics **over time**</li>
+    <li>Open-source project to collect and graph metrics <strong>over time</strong></li>
     <li>Very powerful, but at the cost of complexity</li>
     <li>
       <p>Accepts the stats from StatsD and saves them</p>
@@ -152,11 +158,12 @@ end</code></pre>
 
   <div class="slide">
     <h3>Query</h3>
-    <pre><code>stats.gauges.ngin_production.delayed_jobs.*<code></pre>
+    <pre><code>stats.gauges.ngin_production.delayed_jobs.*</code></pre>
+  </div>
 </section>
 
 <section class="slide">
-  <img src="/images/statsd/delayed-jobs.png" alt="Example graph of delayed jobs queues" />
+  <img class="graph" src="/images/statsd/delayed-jobs.png" alt="Example graph of delayed jobs queues" />
 </section>
 
 
@@ -170,15 +177,15 @@ end</code></pre>
 
   <div class="slide">
     <h3>Proposal</h3>
-    <p>Every minute, on each server, query the `passenger-status` script, and record how many active, booted, and maximum workers are available and sum them up.</p>
+    <p>Every minute, on each server, query the <code>passenger-status</code> script, and record how many active, booted, and maximum workers are available and sum them up.</p>
   </div>
 
   <div class="slide">
     <h3>Send Stats</h3>
-    <pre><code>Metrics.record_number("passengers.#{server_id}.active", passenger_stats.active)
-Metrics.record_number("passengers.#{server_id}.booted", passenger_stats.booted)
-Metrics.record_number("passengers.#{server_id}.max", passenger_stats.max)
-Metrics.record_number("passengers.#{server_id}.queued", passenger_stats.queued)</code></pre>
+    <pre><code>Metrics.record_number("passengers.#{server_id}.active", stats.active)
+Metrics.record_number("passengers.#{server_id}.booted", stats.booted)
+Metrics.record_number("passengers.#{server_id}.max", stats.max)
+Metrics.record_number("passengers.#{server_id}.queued", stats.queued)</code></pre>
   </div>
 
   <div class="slide">
@@ -187,7 +194,7 @@ Metrics.record_number("passengers.#{server_id}.queued", passenger_stats.queued)<
 </section>
 
 <section class="slide">
-  <img src="/images/statsd/ngin-passengers.png" alt="Example graph of Ngin Passenger capacity" />
+  <img class="graph" src="/images/statsd/ngin-passengers.png" alt="Example graph of Ngin Passenger capacity" />
 </section>
 
 <section class="slide">
@@ -215,11 +222,11 @@ Metrics.record_counter("games.completed-by-scoring-type.#{scoring_type}")</code>
 </section>
 
 <section class="slide">
-  <img src="/images/statsd/games-by-sport.png" alt="Example graph of games completed, by sport" />
+  <img class="graph" src="/images/statsd/games-by-sport.png" alt="Example graph of games completed, by sport" />
 </section>
 
 <section class="slide">
-  <img src="/images/statsd/games-by-scoring-type.png" alt="Example graph of games completed, by scoring type" />
+  <img class="graph" src="/images/statsd/games-by-scoring-type.png" alt="Example graph of games completed, by scoring type" />
 </section>
 
 <section class="slide">
