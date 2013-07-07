@@ -12,19 +12,16 @@
 
     <meta name="viewport" content="width=1024, user-scalable=no">
 
-    <!-- Core and extension CSS files -->
-    <link rel="stylesheet" href="/deck.js/core/deck.core.css">
-    <link rel="stylesheet" href="/deck.js/extensions/goto/deck.goto.css">
-    <link rel="stylesheet" href="/deck.js/extensions/menu/deck.menu.css">
-    <link rel="stylesheet" href="/deck.js/extensions/navigation/deck.navigation.css">
-    <link rel="stylesheet" href="/deck.js/extensions/status/deck.status.css">
-    <link rel="stylesheet" href="/deck.js/extensions/hash/deck.hash.css">
+    {% stylesheet app %}
 
     <!-- Theme CSS files (menu swaps these out) -->
-    <link rel="stylesheet" id="style-theme-link" href="/deck.js/themes/style/{{ page.style }}.css">
-    <link rel="stylesheet" id="transition-theme-link" href="/deck.js/themes/transition/{{ page.transition }}.css">
+    {% capture attribute_name %}{{ item.title | handleize }}-{{ i }}-color{% endcapture %}
+    {% capture page_style %}deck.js/themes/style/{{ page.style }}.css{% endcapture %}
+    {% capture page_transition %}deck.js/themes/transition/{{ page.transition }}.css{% endcapture %}
+    {{ page_style | stylesheet page_style }}
+    {{ page_transition | stylesheet }}
 
-    <script src="/deck.js/modernizr.custom.js"></script>
+    {% javascript deck.js/modernizr.custom %}
   </head>
 
   <body class="deck-container">
@@ -49,20 +46,7 @@
 
   <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
 
-
-  <!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="/deck.js/jquery-1.7.min.js"></script>
-
-  <!-- Deck Core and extensions -->
-  <script src="/deck.js/core/deck.core.js"></script>
-  <script src="/deck.js/extensions/hash/deck.hash.js"></script>
-  <script src="/deck.js/extensions/menu/deck.menu.js"></script>
-  <script src="/deck.js/extensions/goto/deck.goto.js"></script>
-  <script src="/deck.js/extensions/status/deck.status.js"></script>
-  <script src="/deck.js/extensions/navigation/deck.navigation.js"></script>
-
-  <!-- Specific to this page -->
-  <script src="/presentation.js"></script>
+  {% javascript app %}
 
 </body>
 </html>
