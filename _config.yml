@@ -6,3 +6,10 @@ exclude:
   - README.markdown
 permalink: /:title
 paginate: 3
+assets:
+  sources:
+    - _assets/images
+    - _assets/javascripts
+    - _assets/stylesheets
+    - _vendors
+
