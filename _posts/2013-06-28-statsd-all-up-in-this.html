@@ -163,7 +163,7 @@ end</code></pre>
 </section>
 
 <section class="slide">
-  <img class="graph" src="/images/statsd/delayed-jobs.png" alt="Example graph of delayed jobs queues" />
+  <img class="graph" src="{{ 'statsd/delayed-jobs.png' | asset_path }}" alt="Example graph of delayed jobs queues" />
 </section>
 
 
@@ -194,7 +194,7 @@ Metrics.record_number("passengers.#{server_id}.queued", stats.queued)</code></pr
 </section>
 
 <section class="slide">
-  <img class="graph" src="/images/statsd/ngin-passengers.png" alt="Example graph of Ngin Passenger capacity" />
+  <img class="graph" src="{{ 'statsd/ngin-passengers.png' | asset_path }}" alt="Example graph of Ngin Passenger capacity" />
 </section>
 
 <section class="slide">
@@ -222,11 +222,11 @@ Metrics.record_counter("games.completed-by-scoring-type.#{scoring_type}")</code>
 </section>
 
 <section class="slide">
-  <img class="graph" src="/images/statsd/games-by-sport.png" alt="Example graph of games completed, by sport" />
+  <img class="graph" src="{{ 'statsd/games-by-sport.png' | asset_path }}" alt="Example graph of games completed, by sport" />
 </section>
 
 <section class="slide">
-  <img class="graph" src="/images/statsd/games-by-scoring-type.png" alt="Example graph of games completed, by scoring type" />
+  <img class="graph" src="{{ 'statsd/games-by-scoring-type.png' | asset_path }}" alt="Example graph of games completed, by scoring type" />
 </section>
 
 <section class="slide">

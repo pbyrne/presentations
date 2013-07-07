@@ -13,7 +13,7 @@ transition: horizontal-slide
     color: #eeeeee;
   }
   .slide.storytime {
-    background-image: url(/images/knowing-is-half-the-battle/storytime.jpg);
+    background-image: url({{ 'knowing-is-half-the-battle/storytime.jpg' | asset_path }});
     background-size: 100%;
   }
   .slide.storytime h1 {
@@ -203,7 +203,7 @@ transition: horizontal-slide
 </section>
 <section class='slide'>
   <h2>See What I Mean?</h2>
-  <img src='/images/knowing-is-half-the-battle/graph-ngin-api-access-with-counts.png'>
+  <img src='{{ 'knowing-is-half-the-battle/graph-ngin-api-access-with-counts.png' | asset_path }}'>
   <p class='slide'>
     <code>legendValue(aliasByNode(limit( sortByMaxima(summarize( stats_counts.ngin_production.api-user-throughput.*:sum,"60seconds")),6),3), "total")</code>
   </p>
@@ -213,11 +213,11 @@ transition: horizontal-slide
 </section>
 <section class='slide'>
   <h2>Examples</h2>
-  <img class='vcenter' src='/images/knowing-is-half-the-battle/graph-etsy-login-attempts.jpg'>
+  <img class='vcenter' src='{{ 'knowing-is-half-the-battle/graph-etsy-login-attempts.jpg' | asset_path }}'>
 </section>
 <section class='slide'>
   <h2>Examples</h2>
-  <img class='vcenter' src='/images/knowing-is-half-the-battle/graph-hostedgraphote-site-visitors.png'>
+  <img class='vcenter' src='{{ 'knowing-is-half-the-battle/graph-hostedgraphote-site-visitors.png' | asset_path }}'>
 </section>
 <section class='slide'>
   <h1>No, What Does it Mean For ME??</h1>
@@ -225,23 +225,23 @@ transition: horizontal-slide
 <section class='slide'>
   <h2>Who is Using our API?</h2>
   <pre><code>Metrics.record_counter("api-user-throughput.#{@api_user.try(:user_name) || 'nil_api_user'}")</code></pre>
-  <img src='/images/knowing-is-half-the-battle/graph-ngin-api-access.png'>
+  <img src='{{ 'knowing-is-half-the-battle/graph-ngin-api-access.png' | asset_path }}'>
 </section>
 <section class='slide'>
   <h2>How Many Users are Logged In?</h2>
   <pre><code>Metrics.record_boolean('user-logged-in', user_object.persisted?)</code></pre>
-  <img src='/images/knowing-is-half-the-battle/graph-ngin-user-logged-in.png'>
+  <img src='{{ 'knowing-is-half-the-battle/graph-ngin-user-logged-in.png' | asset_path }}'>
 </section>
 <section class='slide'>
   <h2>Are We Using Page#show Action Caching?</h2>
   <pre><code>caches_action :show, :if => lambda {|c| Metrics.record_boolean("page-cache", c.cache_page?(c.page_node)) }</code></pre>
-  <img src='/images/knowing-is-half-the-battle/graph-ngin-page-cache-attempts.png'>
+  <img src='{{ 'knowing-is-half-the-battle/graph-ngin-page-cache-attempts.png' | asset_path }}'>
 </section>
 <section class='slide'>
   <h1>What Do You Want to Know?</h1>
 </section>
 <section class='slide'>
-  <img class='vcenter' src='/images/knowing-is-half-the-battle/other-half.png'>
+  <img class='vcenter' src='{{ 'knowing-is-half-the-battle/other-half.png' | asset_path }}'>
 </section>
 <section class='slide'>
   <h1>Questions?</h1>
@@ -263,3 +263,4 @@ transition: horizontal-slide
     </li>
   </ul>
 </section>
+
