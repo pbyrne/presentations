@@ -16,7 +16,7 @@ task :release do
   # year-month-day-hourminute
   timestamp = Time.now.strftime('%Y-%m-%d-%H%M')
   sh "git tag '#{timestamp}' && git push --tag"
-  sh "bundle exec jekyll build && rsync -avz --delete _site/ patrickbyrne.net:/var/www/presentations.patrickbyrne.net/public"
+  sh "bundle exec jekyll build && rsync -avz --delete _site/ presentations.patrickbyrne.net:/var/www/presentations.patrickbyrne.net/public"
 end
 
 desc "Peform a health check on site source"
